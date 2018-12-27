@@ -1,4 +1,4 @@
-const a = 1;
+/* const a = 1;
 const b = 2;
 const c = a+b;
 
@@ -8,12 +8,17 @@ console.log(c);
 function greet(){
     console.log('Hi');
 }
-greet();
+greet(); */
 
 
 //First class functions
 
-function logGreet(fn) {
+/* function logGreet(fn) {
     fn();
 }
-logGreet(greet);
+logGreet(greet); */
+
+// Module 
+/* const greet = require('./greet');
+greet(); */
+
