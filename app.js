@@ -1,7 +1,45 @@
-var greet = require('./greet');
+//Event Emitter
+const Emitter = require('./emitter');
+var emtr = new Emitter();
+
+emtr.on('greet', function() {
+    console.log('hello');
+})
+
+emtr.on('greet', function() {
+    console.log('Hola');
+})
+emtr.on('write', function() {
+    console.log("Hey writer");
+})
+
+emtr.emit('greet');
+emtr.emit('write');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* var greet = require('./greet');
 
 greet.english();
-greet.spanish();
+greet.spanish(); */
 
 
 
