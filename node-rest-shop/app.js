@@ -1,17 +1,20 @@
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
-
+const mongoose = require('mongoose');
 // To parse incoming post requests url encoded or json... 
 const bodyParser = require('body-parser');
 
 const productRoutes = require('./api/routes/products');
 const orderRoutes = require('./api/routes/orders');
 
+// Connecting to the Databases
+mongoose.connect('mongodb+srv://node-shop:' + process.env.MONGO_ATLAS_PS +'@cluster0-cwplo.mongodb.net/test?retryWrites=true', {useNewUrlParser: true});
+
 //To console log requests that are made.
 app.use(morgan('dev'));
 
-//Parsing incoming requests of both forms
+//Parsing incoming requests of both forms(url encoded and json)
 app.use(bodyParser.urlencoded({extended:false }));
 app.use(bodyParser.json());
 
@@ -19,6 +22,12 @@ app.use(bodyParser.json());
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+    if(req.method === 'OPTIONS'){
+        res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
+        return res.status(200).json({});
+
+    }
+    next();
 })
 
 //Routes Handling
