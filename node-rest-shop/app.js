@@ -10,7 +10,7 @@ const orderRoutes = require('./api/routes/orders');
 
 // Connecting to the Databases
 mongoose.connect('mongodb+srv://node-shop:' + process.env.MONGO_ATLAS_PS +'@cluster0-cwplo.mongodb.net/test?retryWrites=true', {useNewUrlParser: true});
-
+mongoose.Promise = global.Promise;
 //To console log requests that are made.
 app.use(morgan('dev'));
 

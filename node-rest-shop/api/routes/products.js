@@ -4,9 +4,25 @@ const Product = require('../models/products');
 const mongoose  = require('mongoose');
 
 router.get('/', (req, res, next) => {
-    Product.find().exec().then(docs => {
+    Product.find().
+    select('name price _id').
+    exec().then(docs => {
         if(docs){
-            res.status(200).json(docs);
+            const response = {
+                count: docs.length,
+                products: docs.map(doc => {
+                    return {
+                        name: doc.name,
+                        price: doc.price,
+                        _id: doc._id,
+                        request: {
+                            type: "GET",
+                            url:"http://localhost:3000/products/" + doc._id
+                        }
+                    }
+                })
+            }
+            res.status(200).json(response);
         } else {
             res.status(404).json({
                 message:"No results"
