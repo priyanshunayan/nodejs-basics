@@ -8,7 +8,6 @@ router.get('/', (req, res, next) => {
 } );
 router.get('/:productId', (req, res, next) => {
     const id = req.params.productId;
-    console.log(req.params.productId);
     if(id === 'special'){
         res.status(200).json({
             message:'The special id',
@@ -21,8 +20,13 @@ router.get('/:productId', (req, res, next) => {
     }
 })
 router.post('/', (req, res, next) => {
+    const product= {
+        name: req.body.name,
+        price: req.body.price
+    }
     res.status(200).json({
-        message: 'POST at products'
+        message: 'POST at products',
+        product :product
     })
 } )
 
